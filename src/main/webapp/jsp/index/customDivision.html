@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="/js/jquery-3.1.1.js"></script>
+    <script type="text/javascript" src="/js/layui/layui.js"></script>
+    <link  rel="stylesheet"  href="/js/layui/css/layui.css" />
+</head>
+<body>
+
+</body>
+</html>
+<script>
+
+    layui.use('table', function() {
+        var tableWidth = $("#info").width() - 28;
+        var table = layui.table;
+        var pro = parent.proId;
+        table.render({
+            id: 'info',
+            elem: '#info'
+            , url: '/user/getAllCustom'
+            , request: {
+                pageName: 'current'
+                , limitName: 'size'
+            },
+            response: {
+                statusName: 'code'
+                , statusCode: 0
+                , msgName: 'msg'
+                , countName: 'count'
+                , dataName: 'data'
+            }
+            , cols: [[
+                {field: 'personalityLabel', width: tableWidth * 0.22, title: '个性标签'},
+                {field: 'username', width: tableWidth * 0.22, title: '姓名'},
+                , {field: 'rank', width: tableWidth * 0.22, title: '操作', toolbar: '#barDemo'}
+            ]]
+            , page: true
+        });
+    })
+
+
+
+</script>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>后台登录</title>
+<meta name="author" content="DeathGhost" />
+<link rel="stylesheet" type="text/css" href="/css/style.css" />
+<style>
+body{height:100%;background:#16a085;overflow:hidden;}
+canvas{z-index:-1;position:absolute;}
+</style>
+<script src="/js/jquery-3.1.1.js"></script>
+<script src="/js/Particleground.js"></script>
+<script>
+$(document).ready(function() {
+  //粒子背景特效
+  $('body').particleground({
+    dotColor: '#5cbdaa',
+    lineColor: '#5cbdaa'
+  });
+  //测试提交，对接程序删除即可
+});
+</script>
+</head>
+<body>
+<dl class="admin_login">
+ <dt>
+  <strong>站点后台管理系统</strong>
+  <em>Management System</em>
+ </dt>
+ <dd class="user_icon">
+  <input type="text" id="username" placeholder="账号" class="login_txtbx"/>
+ </dd>
+ <dd class="pwd_icon">
+  <input type="password" id="password" placeholder="密码" class="login_txtbx"/>
+ </dd>
+ 
+ <dd>
+  <input type="button" value="立即登录" class="submit_btn"/>
+ </dd>
+ 
+</dl>
+</body>
+<script>
+ $(".submit_btn").click(function(){
+   $.ajax({
+     type: "GET",
+     url: "http://localhost:8080/" +"managerUser/login",
+     async:false,
+     data: {
+      username:$("#username").val(),
+      password:$("#password").val(),
+     },
+     success: function(res){
+      if (res.code==0){
+       sessionStorage.setItem("role",res.data.role);
+       window.location.href="http://localhost:8080/admin/index";
+       }else {
+       alert("账号或者密码错误")
+      }
+   }
+  })
+ });
+</script>
+</html>

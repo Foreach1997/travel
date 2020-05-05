@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="/js/layui/layui.js"></script>
+    <link   rel="stylesheet" href="/js/layui/css/layui.css" />
+    <script type="text/javascript" src="/js/jquery-3.1.1.js"></script>
+</head>
+<body>
+<div class="layui-form-item layui-form-text">
+    <div class="layui-input-block">
+        <textarea placeholder="请输入内容" id="info" class="layui-textarea"></textarea>
+    </div>
+</div>
+<div class="layui-form-item" >
+    <button id="confirm"  type="button"  style="margin-left:100px;padding-left: 80px;padding-right: 80px" class="layui-btn">确认</button>
+</div>
+</body>
+</html>
+<script>
+    $("#confirm").click(function(){
+        var data = {};
+        console.log(parent.id)
+        data.id = parent.id;
+        data.levelMsg = $("#info").val();
+    $.ajax({
+        type: "GET",
+        url: "http://localhost:8080/customization/levelMsg",
+        async:false,
+        data: {
+            id:parent.id,
+            levelMsg: $("#info").val()
+        },
+        success: function(res){
+            var index=parent.layer.getFrameIndex(window.name);
+            parent.layer.close(index);
+            parent.layer.msg(res.msg);
+            parent.reload();
+        }
+    })})
+
+</script>
