@@ -187,11 +187,12 @@
                     </tr>
                     <c:if test="${cus.custStatus==2 }">
                     <tr>
-                        <td colspan="4" class="form_title_td"><span class="icon_location2"></span>定制师回复</td>
+                        <td colspan="4" class="form_title_td"><span class="icon_location2"></span>回复</td>
                     </tr>
                         <c:forEach items="${customizationMsgs}" var="msg">
                             <tr>
                                 <td class="need td_w_120"></td>
+                                <td class="user_form_txt">${msg.customizedName}:</td>
                                 <td class="user_form_input" colspan="2">
                                     <textarea class="user_inputxt" disabled style=" min-height:100px; width: 450px" >${msg.customizedInfo}</textarea>
                                 </td>
@@ -254,7 +255,7 @@
             ,offset: 'r' //具体配置参考：<a href="http://www.layui.com/doc/modules/layer.html#offset" target="_blank">offset参数项</a>
             ,content: 'http://localhost:8080/jsp/index/findCus.html'
             //,btn: '关闭全部'
-            ,area: ['40%', '40%']
+            ,area: ['30%', '30%']
             ,btnAlign: 'c' //按钮居中
             ,shade: 0 //不显示遮罩
             // ,yes: function(){

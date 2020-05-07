@@ -95,15 +95,16 @@ public class CustomizationController {
     @GetMapping("/customizedMsg")
     @ResponseBody
     public Object customizedMsg(HttpSession session,String customizedMsg, String id){
+        User user = (User)session.getAttribute(Const.CURRENT_USER);
         Customization customization = new Customization();
         //customization.setCustomizedMsg(customizedMsg);
         customization.setCustStatus(2);
         customizationService.update(customization,new EntityWrapper<Customization>().eq("id",id));
         CustomizationMsg customizationMsg = new CustomizationMsg();
-        User user = (User)session.getAttribute(Const.CURRENT_USER);
         customizationMsg.setCustomizedId(user.getId());
         customizationMsg.setCustomizedInfo(customizedMsg);
         customizationMsg.setCustomizationId(id);
+        customizationMsg.setCustomizedName(user.getUsername());
         customizationMsgMapper.insert(customizationMsg);
         return RepResult.repResult(0,"成功",null);
     }

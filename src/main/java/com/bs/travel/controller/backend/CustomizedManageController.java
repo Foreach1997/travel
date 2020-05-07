@@ -9,13 +9,16 @@ import com.bs.travel.entity.Customization;
 import com.bs.travel.entity.User;
 import com.bs.travel.service.ICustomizationService;
 import com.bs.travel.util.RepResult;
+import com.bs.travel.vo.CustomizationVO;
 import com.bs.travel.vo.CustomizedInfoVO;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -67,7 +70,8 @@ public class CustomizedManageController {
 
     @RequestMapping("list")
     @ResponseBody
-    public ServerResponse list(String status, @RequestParam(value="current",defaultValue="1") int current, @RequestParam(value="size",defaultValue="10") int size){
+    public ServerResponse list(HttpServletRequest request,String status, @RequestParam(value="current",defaultValue="1") int current, @RequestParam(value="size",defaultValue="10") int size){
+        User user = (User) request.getSession().getAttribute(Const.CURRENT_USER);
         if (current<=0||size<=0){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.ILLEGAL_ARGUMENT.getCode(),ResponseCode.ILLEGAL_ARGUMENT.getDesc());
         }
@@ -76,8 +80,23 @@ public class CustomizedManageController {
             entityWrapper=new EntityWrapper();
             entityWrapper.eq("status",Integer.parseInt(status));
         }
-
-        return ServerResponse.createBySuccess(customizationService.selectMapsPage(new Page(current,size),entityWrapper)) ;
+        Page customizations = customizationService.selectPage(new Page(current,size),entityWrapper);
+        List<CustomizationVO> customizationVOS = new ArrayList<>();
+        List<Customization>  customizationList =customizations.getRecords();
+        Integer role = user.getRole();
+        CustomizationVO customizationVO = null;
+        for (Customization record : customizationList) {
+            customizationVO = new CustomizationVO();
+            BeanUtils.copyProperties(record,customizationVO);
+            if (role == 1){
+                customizationVO.setFlag(1);
+            }else {
+                customizationVO.setFlag(0);
+            }
+            customizationVOS.add(customizationVO);
+        }
+        customizations.setRecords(customizationVOS);
+        return ServerResponse.createBySuccess(customizations) ;
     }
 
     @PostMapping("/updateInfo")

@@ -101,7 +101,8 @@
                                 totalData = data.total;
                                 pageCount = data.pages;
                                 var showTableHtml = "";
-                                if (data[0].)
+                                console.log(data.records[0].flag);
+                                if (data.records[0].flag === 0){
                                 $.each(data.records,function(i,item){
                                     var edtior="<td class='center'><a href='http://localhost:8080/managerCustomization/detailView/"+item.id+"' title='预览' class='link_icon' >&#118;</a>" +
                                         "<a  title='定制设计' class='link_icon'value='"+item.id+"' onclick='cus(this)'>&#101;</a>"+
@@ -120,6 +121,21 @@
                                         "<td style='text-align: center;'>"+item.percapitaConsumption+"</td>"+
                                         edtior+"</tr>";
                                 });
+                                }else {
+                                    $.each(data.records,function(i,item){
+                                        var edtior="<td class='center'><a href='http://localhost:8080/managerCustomization/detailView/"+item.id+"' title='预览' class='link_icon' >&#118;</a></td>";
+                                        showTableHtml += "<tr>"+
+                                            "<td style=\"padding-left: 20px;\">"+item.personName+"</td>"+
+                                            "<td style=\"padding-left: 20px;\">"+item.phone+"</td>"+
+                                            "<td style='text-align: center;'>"+item.startAreaname+"</td>"+
+                                            "<td style='text-align: center;'>"+item.endAreaname+"</td>"+
+                                            "<td style='text-align: center;'>"+item.startDate+"</td>"+
+                                            "<td style='text-align: center;'>"+item.days+"</td>"+
+                                            "<td style='text-align: center;'>"+item.number+"</td>"+
+                                            "<td style='text-align: center;'>"+item.percapitaConsumption+"</td>"+
+                                            edtior+"</tr>";
+                                    });
+                                }
 
                                 $("#showtable").html(showTableHtml);
                                 //显示分页数字
@@ -199,20 +215,41 @@
                                     totalData = data.total;
                                     pageCount = data.pages;
                                     var showTableHtml = "";
-                                    $.each(data.records,function(i,item){
-                                        var edtior="<td class='center'><a href='http://localhost:8080/managerCustomization/detailView/"+item.id+"' title='预览' class='link_icon' >&#118;</a></td>";
-                                        showTableHtml += "<tr>"+
+                                    if (data.records[0].flag === 0){
+                                        $.each(data.records,function(i,item){
+                                            var edtior="<td class='center'><a href='http://localhost:8080/managerCustomization/detailView/"+item.id+"' title='预览' class='link_icon' >&#118;</a>" +
+                                                "<a  title='定制设计' class='link_icon'value='"+item.id+"' onclick='cus(this)'>&#101;</a>"+
+                                                "<a  title=删除' class='link_icon'value='"+item.id+"' onclick='del(this)'>删除</a>"+
+                                                "<a  title='联系' class='link_icon'value='"+item.qq+"' onclick='connct(this)'>联系</a>"+
+                                                "<a  title='回复' class='link_icon'value='"+item.id+"' onclick='cusMsg(this)'>回复</a>"
+                                                +"</td>";
+                                            showTableHtml += "<tr>"+
+                                                "<td style=\"padding-left: 20px;\">"+item.personName+"</td>"+
+                                                "<td style=\"padding-left: 20px;\">"+item.phone+"</td>"+
+                                                "<td style='text-align: center;'>"+item.startAreaname+"</td>"+
+                                                "<td style='text-align: center;'>"+item.endAreaname+"</td>"+
+                                                "<td style='text-align: center;'>"+item.startDate+"</td>"+
+                                                "<td style='text-align: center;'>"+item.days+"</td>"+
+                                                "<td style='text-align: center;'>"+item.number+"</td>"+
+                                                "<td style='text-align: center;'>"+item.percapitaConsumption+"</td>"+
+                                                edtior+"</tr>";
+                                        });
+                                    }else {
+                                        $.each(data.records, function (i, item) {
+                                            var edtior = "<td class='center'><a href='http://localhost:8080/managerCustomization/detailView/" + item.id + "' title='预览' class='link_icon' >&#118;</a></td>";
+                                            showTableHtml += "<tr>" +
 
-                                            "<td style=\"padding-left: 20px;\">"+item.personName+"</td>"+
-                                            "<td style=\"padding-left: 20px;\">"+item.phone+"</td>"+
-                                            "<td style='text-align: center;'>"+item.startAreaname+"</td>"+
-                                            "<td style='text-align: center;'>"+item.endAreaname+"</td>"+
-                                            "<td style='text-align: center;'>"+item.startDate+"</td>"+
-                                            "<td style='text-align: center;'>"+item.days+"</td>"+
-                                            "<td style='text-align: center;'>"+item.number+"</td>"+
-                                            "<td style='text-align: center;'>"+item.percapitaConsumption+"</td>"+
-                                            edtior+"</tr>";
-                                    });
+                                                "<td style=\"padding-left: 20px;\">" + item.personName + "</td>" +
+                                                "<td style=\"padding-left: 20px;\">" + item.phone + "</td>" +
+                                                "<td style='text-align: center;'>" + item.startAreaname + "</td>" +
+                                                "<td style='text-align: center;'>" + item.endAreaname + "</td>" +
+                                                "<td style='text-align: center;'>" + item.startDate + "</td>" +
+                                                "<td style='text-align: center;'>" + item.days + "</td>" +
+                                                "<td style='text-align: center;'>" + item.number + "</td>" +
+                                                "<td style='text-align: center;'>" + item.percapitaConsumption + "</td>" +
+                                                edtior + "</tr>";
+                                        });
+                                    }
 
                                     $("#showtable").html(showTableHtml);
                                     //显示分页数字
@@ -289,6 +326,7 @@
                         dataType:"json",
                         success:function(obj) {
                             layer.msg('成功', {icon: 1});
+                            init();
                         }
                     })
             })

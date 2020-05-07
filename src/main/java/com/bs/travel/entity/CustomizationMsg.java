@@ -29,6 +29,8 @@ public class CustomizationMsg extends Model<CustomizationMsg> {
     private Date createTime;
     @TableField("customization_id")
     private String customizationId;
+    @TableField("customized_name")
+    private String customizedName;
 
     @Override
     protected Serializable pkVal() {

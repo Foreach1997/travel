@@ -2,6 +2,7 @@ package com.bs.travel.controller;
 
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.plugins.Page;
 import com.bs.travel.common.Const;
 import com.bs.travel.common.ServerResponse;
 import com.bs.travel.entity.EmailValidate;
@@ -153,11 +154,16 @@ public class UserController {
      */
     @GetMapping("/getCus")
     @ResponseBody
-    public Object getCus(String areaName,String personalityLabel){
-        return RepResult.repResult(0,"",userService.selectList(new EntityWrapper<User>()
+    public Object getCus(Integer current,Integer size,String areaName,String personalityLabel){
+        Page page = new Page();
+        page.setSize(size);
+        page.setCurrent(current);
+        page =  userService.selectPage(page,new EntityWrapper<User>()
                 .eq("role",1)
                 .eq("area_name",areaName)
-                .like(personalityLabel!= null,"personality_label",personalityLabel)));
+                .like(personalityLabel!= null,"personality_label",personalityLabel));
+
+        return RepResult.repResult(0,"",page.getRecords(),page.getTotal());
     }
     /**
      * 登出
