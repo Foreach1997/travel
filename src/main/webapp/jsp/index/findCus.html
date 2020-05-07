@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="/js/jquery-3.1.1.js"></script>
+    <script type="text/javascript" src="/js/layui/layui.js"></script>
+    <script type="text/javascript" src="/js/layui/layui.all.js"></script>
+    <link  rel="stylesheet"  href="/js/layui/css/layui.css" />
+</head>
+<body>
+<div class="layui-inline" style="margin-top: 5px;" >
+    <label class="layui-form-label">个性标签:</label>
+    <div class="layui-input-inline">
+        <input type="text" id="personalityLabel"  placeholder="请输入个性标签" class="layui-input">
+    </div>
+</div>
+<div class="layui-form-item" style="margin-left: 600px">
+    <div class="layui-inline">
+        <button class="layui-btn layui-btn-normal" id="find">查询</button>
+    </div>
+</div>
+<div id="info" lay-filter="demo"></div>
+</body>
+</html>
+<script type="text/html" id="qq">
+    <a href=http://wpa.qq.com/msgrd?v=3&uin={{d.qq}}&site=qq&menu=yes" target='_blank' class='layui-btn layui-btn-danger layui-btn-xs' id="qqClick" >{{d.qq}}</a>
+</script>
+<script>
+
+    layui.use('table', function() {
+        var tableWidth = $("#info").width() - 28;
+        var table = layui.table;
+        var pro = parent.proId;
+        table.render({
+            id: 'info',
+            elem: '#info'
+            , url: 'http://localhost:8080/user/getCus'
+            , request: {
+                pageName: 'current'
+                , limitName: 'size'
+            },
+            where: {
+                areaName: parent.areaName
+            },
+            response: {
+                statusName: 'code'
+                , statusCode: 0
+                , msgName: 'msg'
+                , countName: 'count'
+                , dataName: 'data'
+            }
+            , cols: [[
+                {field: 'personalityLabel', width: tableWidth * 0.22, title: '个性标签',}
+                , {field: 'username', width: tableWidth * 0.25, title: '姓名'}
+                , {field: 'qq', width: tableWidth * 0.22, title: 'qq',toolbar: '#qq'}
+            ]]
+            , page: true
+        });
+    })
+
+    function find(){
+        var personalityLabel = $('#personalityLabel').val();
+        layui.table.reload('info',{
+            where: {
+                personalityLabel:personalityLabel
+            }});
+    }
+
+    $("#find").click(function () {
+        console.log(123)
+        find();
+    })
+    // $("#qqClick").click(function () {
+    //     window.open("http://wpa.qq.com/msgrd?v=3&uin="+qq+"&site=qq&menu=yes","_blank");
+    // })
+</script>

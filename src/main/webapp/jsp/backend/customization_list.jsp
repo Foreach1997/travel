@@ -105,6 +105,7 @@
                                 $.each(data.records,function(i,item){
                                     var edtior="<td class='center'><a href='http://localhost:8080/managerCustomization/detailView/"+item.id+"' title='预览' class='link_icon' >&#118;</a>" +
                                         "<a  title='定制设计' class='link_icon'value='"+item.id+"' onclick='cus(this)'>&#101;</a>"+
+                                        "<a  title=删除' class='link_icon'value='"+item.id+"' onclick='del(this)'>删除</a>"+
                                         "<a  title='联系' class='link_icon'value='"+item.qq+"' onclick='connct(this)'>联系</a>"+
                                         "<a  title='回复' class='link_icon'value='"+item.id+"' onclick='cusMsg(this)'>回复</a>"
                                         +"</td>";
@@ -270,6 +271,27 @@
                 area: ['1026px', '220px'],
                 content: 'http://localhost:8080/jsp/backend/addMsg.html'
             });
+        });
+    }
+    function del(t) {
+        id = $(t).attr("value");
+        layui.use('layer', function () {
+            layer.confirm('确定删除？', {
+                btn: ['确定','取消'] //按钮
+            }, function() {
+                $.ajax({
+                        type:"GET",
+                        url:"http://localhost:8080/managerCustomization/delCus",
+                        data:{
+                            id:id
+                        },
+                        async: false,
+                        dataType:"json",
+                        success:function(obj) {
+                            layer.msg('成功', {icon: 1});
+                        }
+                    })
+            })
         });
     }
     function connct(t) {

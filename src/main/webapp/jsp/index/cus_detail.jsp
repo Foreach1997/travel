@@ -224,7 +224,7 @@
 </body>
 </html>
 <script>
-
+    var areaName;
 
     layui.use("layer",function (){
         // var str = "<ul class='site-dir' style='display: block;'>\n"
@@ -246,19 +246,21 @@
         // })
         // console.log(str)
         // //边缘弹出
-        // var layer = layui.layer;
-        // layer.open({
-        //     type: 1
-        //     ,title:'定制师'
-        //     ,offset: 'r' //具体配置参考：<a href="http://www.layui.com/doc/modules/layer.html#offset" target="_blank">offset参数项</a>
-        //     ,content: str
-        //     //,btn: '关闭全部'
-        //     ,btnAlign: 'c' //按钮居中
-        //     ,shade: 0 //不显示遮罩
-        //     // ,yes: function(){
-        //     //     layer.closeAll();
-        //     // }
-        // });
+        var layer = layui.layer;
+        areaName = $("#areaName").val()
+        layer.open({
+            type: 2
+            ,title:'定制师'
+            ,offset: 'r' //具体配置参考：<a href="http://www.layui.com/doc/modules/layer.html#offset" target="_blank">offset参数项</a>
+            ,content: 'http://localhost:8080/jsp/index/findCus.html'
+            //,btn: '关闭全部'
+            ,area: ['40%', '40%']
+            ,btnAlign: 'c' //按钮居中
+            ,shade: 0 //不显示遮罩
+            // ,yes: function(){
+            //     layer.closeAll();
+            // }
+        });
     })
 
 </script>

@@ -76,7 +76,6 @@ public class CustomizedManageController {
             entityWrapper=new EntityWrapper();
             entityWrapper.eq("status",Integer.parseInt(status));
         }
-        Page customizations = customizationService.selectMapsPage(new Page(current,size),entityWrapper);
 
         return ServerResponse.createBySuccess(customizationService.selectMapsPage(new Page(current,size),entityWrapper)) ;
     }
@@ -89,6 +88,14 @@ public class CustomizedManageController {
         customization.setCustomizedInfo(customizedInfoVO.getCustomizedInfo());
         customization.setCustomizedId(user.getId());
         customizationService.update(customization,new EntityWrapper<Customization>().eq("id",customizedInfoVO.getId()));
+        return RepResult.repResult(0,"成功",null);
+    }
+
+    @GetMapping("/delCus")
+    @ResponseBody
+    public Object delCus(String id, HttpServletRequest request){
+        User user = (User) request.getSession().getAttribute(Const.CURRENT_USER);
+        customizationService.delete(new EntityWrapper<Customization>().eq("id",id));
         return RepResult.repResult(0,"成功",null);
     }
 

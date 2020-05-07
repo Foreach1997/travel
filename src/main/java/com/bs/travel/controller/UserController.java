@@ -29,6 +29,7 @@ import java.util.List;
  * @since 2019-01-24
  */
 @Controller
+@CrossOrigin
 @RequestMapping("/user")
 public class UserController {
 
@@ -147,6 +148,17 @@ public class UserController {
     }
 
 
+    /**
+     *
+     */
+    @GetMapping("/getCus")
+    @ResponseBody
+    public Object getCus(String areaName,String personalityLabel){
+        return RepResult.repResult(0,"",userService.selectList(new EntityWrapper<User>()
+                .eq("role",1)
+                .eq("area_name",areaName)
+                .like(personalityLabel!= null,"personality_label",personalityLabel)));
+    }
     /**
      * 登出
      */
