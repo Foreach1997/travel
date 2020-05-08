@@ -1,6 +1,7 @@
 package com.bs.travel.controller;
 
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.bs.travel.common.ResponseCode;
 import com.bs.travel.common.ServerResponse;
@@ -49,6 +50,10 @@ public class ThemeController {
         return ServerResponse.createBySuccess(themeService.selectPage(new Page(current,size))) ;
     }
 
-
+    @ResponseBody
+    @RequestMapping("/getThemeList")
+    public ServerResponse getThemeList(){
+        return ServerResponse.createBySuccess(themeService.selectList(new EntityWrapper<>()));
+    }
 }
 

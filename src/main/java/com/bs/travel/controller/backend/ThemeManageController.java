@@ -1,8 +1,11 @@
 package com.bs.travel.controller.backend;
 
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.bs.travel.common.ServerResponse;
 import com.bs.travel.entity.Theme;
+import com.bs.travel.entity.ThemeProduct;
+import com.bs.travel.service.IThemeProductService;
 import com.bs.travel.service.IThemeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,6 +33,8 @@ public class ThemeManageController {
     @Autowired
     private IThemeService themeService;
 
+    @Autowired
+    private IThemeProductService themeProductService;
 
     @ResponseBody
     @RequestMapping("/save")
@@ -40,9 +45,14 @@ public class ThemeManageController {
     @ResponseBody
     @RequestMapping("/update/{tId}")
     public ServerResponse update(@PathVariable String tId, Theme theme){
+        ThemeProduct themeProduct = new ThemeProduct();
+        themeProduct.setThemeName(theme.getThemeName());
+        themeProductService.update(themeProduct,new EntityWrapper<ThemeProduct>().eq("theme_id",tId));
         theme.setId(tId);
         return ServerResponse.createByResult(theme.updateById());
     }
+
+
 
     @ResponseBody
     @RequestMapping("/delete/{tId}")
