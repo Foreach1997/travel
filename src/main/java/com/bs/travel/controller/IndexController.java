@@ -1,5 +1,6 @@
 package com.bs.travel.controller;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.bs.travel.entity.Product;
 import com.bs.travel.entity.Theme;
 import com.bs.travel.service.IProductService;
@@ -64,8 +65,9 @@ public class IndexController {
         return "index/my_order";
     }
     @RequestMapping("/plistView")
-    public String plistView(){
-
+    public String plistView(Model model){
+        List<Theme> themes=themeService.selectList(new EntityWrapper<>());
+        model.addAttribute("themes",themes);
         return "index/plist";
     }
 

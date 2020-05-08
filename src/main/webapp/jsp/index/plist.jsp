@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
     <title>产品信息</title>
@@ -53,22 +54,12 @@
                     <b>特色旅游</b>
                 </div>
                 <ul class="custom-list custom-feature">
-                    <li  value="自然山水">
-                        自然山水                        </li>
-                    <li  value="沙滩海岸">
-                        沙滩海岸                        </li>
-                    <li value="漂流">
-                        漂流                                     </li>
-                    <li value="游乐园">
-                        游乐园                        </li>
-                    <li value="温泉">
-                        温泉                        </li>
-                    <li value="徒步登山">
-                        徒步登山                        </li>
-                    <li value="酒店">
-                        酒店                        </li>
-                    <li value="自由行">
-                        自由行                        </li>              </ul>
+                    <c:forEach items="${themes}" var="msg">
+                        <li  value="${msg.themeName}">
+                                ${msg.themeName}
+                        </li>
+                    </c:forEach>
+                </ul>
                 <a class="theme-feature"  href="http://localhost:8080/productlistView"> <p class="all_r">更多&gt;</p></a>
             </div>
             <div class="tour-content ">
