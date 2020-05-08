@@ -105,11 +105,7 @@
                                 if (data.records[0].flag === 0){
                                 $.each(data.records,function(i,item){
                                     var edtior="<td class='center'><a href='http://localhost:8080/managerCustomization/detailView/"+item.id+"' title='预览' class='link_icon' >&#118;</a>" +
-                                        "<a  title='定制设计' class='link_icon'value='"+item.id+"' onclick='cus(this)'>&#101;</a>"+
-                                        "<a  title=删除' class='link_icon'value='"+item.id+"' onclick='del(this)'>删除</a>"+
-                                        "<a  title='联系' class='link_icon'value='"+item.qq+"' onclick='connct(this)'>联系</a>"+
-                                        "<a  title='回复' class='link_icon'value='"+item.id+"' onclick='cusMsg(this)'>回复</a>"
-                                        +"</td>";
+                                        "<a  title=删除' class='link_icon'value='"+item.id+"' onclick='del(this)'>删除</a></td>";
                                     showTableHtml += "<tr>"+
                                         "<td style=\"padding-left: 20px;\">"+item.personName+"</td>"+
                                         "<td style=\"padding-left: 20px;\">"+item.phone+"</td>"+
@@ -123,7 +119,10 @@
                                 });
                                 }else {
                                     $.each(data.records,function(i,item){
-                                        var edtior="<td class='center'><a href='http://localhost:8080/managerCustomization/detailView/"+item.id+"' title='预览' class='link_icon' >&#118;</a></td>";
+                                        var edtior="<td class='center'><a href='http://localhost:8080/managerCustomization/detailView/"+item.id+"' title='预览' class='link_icon' >&#118;</a>"+
+                                        "<a  title='定制设计' class='link_icon'value='"+item.id+"' onclick='cus(this)'>&#101;</a>"+
+                                        "<a  title='联系' class='link_icon'value='"+item.qq+"' onclick='connct(this)'>联系</a>"+
+                                        "<a  title='回复' class='link_icon'value='"+item.id+"' onclick='cusMsg(this)'>回复</a></td>"
                                         showTableHtml += "<tr>"+
                                             "<td style=\"padding-left: 20px;\">"+item.personName+"</td>"+
                                             "<td style=\"padding-left: 20px;\">"+item.phone+"</td>"+
@@ -218,11 +217,7 @@
                                     if (data.records[0].flag === 0){
                                         $.each(data.records,function(i,item){
                                             var edtior="<td class='center'><a href='http://localhost:8080/managerCustomization/detailView/"+item.id+"' title='预览' class='link_icon' >&#118;</a>" +
-                                                "<a  title='定制设计' class='link_icon'value='"+item.id+"' onclick='cus(this)'>&#101;</a>"+
-                                                "<a  title=删除' class='link_icon'value='"+item.id+"' onclick='del(this)'>删除</a>"+
-                                                "<a  title='联系' class='link_icon'value='"+item.qq+"' onclick='connct(this)'>联系</a>"+
-                                                "<a  title='回复' class='link_icon'value='"+item.id+"' onclick='cusMsg(this)'>回复</a>"
-                                                +"</td>";
+                                                "<a  title=删除' class='link_icon'value='"+item.id+"' onclick='del(this)'>删除</a></td>"
                                             showTableHtml += "<tr>"+
                                                 "<td style=\"padding-left: 20px;\">"+item.personName+"</td>"+
                                                 "<td style=\"padding-left: 20px;\">"+item.phone+"</td>"+
@@ -236,7 +231,10 @@
                                         });
                                     }else {
                                         $.each(data.records, function (i, item) {
-                                            var edtior = "<td class='center'><a href='http://localhost:8080/managerCustomization/detailView/" + item.id + "' title='预览' class='link_icon' >&#118;</a></td>";
+                                            var edtior = "<td class='center'><a href='http://localhost:8080/managerCustomization/detailView/" + item.id + "' title='预览' class='link_icon' >&#118;</a></td>"+
+                                                "<a  title='定制设计' class='link_icon'value='"+item.id+"' onclick='cus(this)'>&#101;</a>"+
+                                                "<a  title='联系' class='link_icon'value='"+item.qq+"' onclick='connct(this)'>联系</a>"+
+                                                "<a  title='回复' class='link_icon'value='"+item.id+"' onclick='cusMsg(this)'>回复</a></td>"
                                             showTableHtml += "<tr>" +
 
                                                 "<td style=\"padding-left: 20px;\">" + item.personName + "</td>" +

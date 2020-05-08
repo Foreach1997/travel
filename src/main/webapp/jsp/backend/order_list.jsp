@@ -185,7 +185,8 @@
                                     pageCount = data.pages;
                                     var showTableHtml = "";
                                     $.each(data.records,function(i,item){
-                                        var edtior="<td class='center'><a href='http://localhost:8080/managerProductOrder/detailView/"+item.id+"' title='查看' class='link_icon'>&#118;</a> </td>";
+                                        var edtior="<td class='center'><a href='http://localhost:8080/managerProductOrder/detailView/"+item.id+"' title='查看' class='link_icon'>&#118;</a> </td>"
+                                        +"<a  title=删除' class='link_icon'value='"+item.id+"' onclick='del(this)'>删除</a>";
                                         showTableHtml += "<tr>"+
                                             "<td style=\"padding-left: 20px;\">"+item.orderNo+"</td>"+
                                             "<td style='text-align: center;'>"+item.username+"</td>"+

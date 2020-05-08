@@ -35,7 +35,7 @@
                                 <li>
                                     <label>出游类型：</label>
                                     <div class="cus-mold">
-                                        <span class="active" data-v="group">团体定制</span>
+                                        <span class="active" data-v="group">个体定制</span>
                                     </div>
                                 </li>
                                 <li>
