@@ -159,10 +159,9 @@
         var param = $("#form1").serialize();;
         console.log(param);
         $.post("http://localhost:8080/user/update",param,function(result){
-            if(result.success){
+            if(result.status === 200){
                 alert("更新成功");
             }
-
         });
 
     }
